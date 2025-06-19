@@ -1,178 +1,206 @@
-<!-- Include Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Gallery</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    .image-container {
+      position: relative;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
 
-<!-- Gallery Section -->
-<section id="gallery" class="py-16 bg-gray-50">
-  <div class="section-container">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-      <div class="text-center md:text-left">
-        <h2 class="section-title text-3xl font-bold text-gray-800">Gallery</h2>
-        <p class="section-subtitle text-gray-600">View images from our recent activities</p>
-      </div>
-      <div class="gallery-swiper-controls flex items-center gap-6">
-        <button class="gallery-swiper-button-prev swiper-nav-btn" aria-label="Previous Slide">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <div class="gallery-swiper-pagination swiper-pagination"></div>
-        <button class="gallery-swiper-button-next swiper-nav-btn" aria-label="Next Slide">
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
+    .image-container img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
 
-    <div class="swiper" id="gallery-swiper">
-      <div class="swiper-wrapper" id="gallery-wrapper">
-        <!-- Slides will be injected here by JavaScript -->
-      </div>
+    .image-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      color: #fff;
+      padding: 12px 16px;
+      box-sizing: border-box;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+
+    .gallery-wrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-slide {
+      min-width: 100%;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+
+    .swiper-nav-btn {
+      background-color: white;
+      border: 1px solid #056839;
+      color: #056839;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 0 2px white;
+      cursor: pointer;
+    }
+
+    .swiper-nav-btn:hover {
+      background-color: #f0fdf4;
+    }
+
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #056839;
+    }
+
+    @media (max-width: 768px) {
+      .image-container img {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-container img {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col items-center">
+    <h1 class="font-extrabold text-2xl mb-2">Image Gallery</h1>
+    <p class="text-sm mb-10">View images from our recent activities</p>
+
+    <div class="relative w-full max-w-6xl overflow-hidden">
+      <!-- Navigation Buttons -->
+      <button class="swiper-nav-btn absolute z-10 left-0 -ml-6" aria-label="Previous" id="prevBtn" style="top: 50%; transform: translateY(-50%)">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+
+      <button class="swiper-nav-btn absolute z-10 right-0 -mr-6" aria-label="Next" id="nextBtn" style="top: 50%; transform: translateY(-50%)">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+
+      <!-- Gallery Slides -->
+      <div id="gallery" class="gallery-wrapper"></div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center mt-8" id="pagination"></div>
     </div>
   </div>
-</section>
 
-<!-- Include Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      const gallery = document.getElementById("gallery");
+      const pagination = document.getElementById("pagination");
+      let slideIndex = 0;
+      let slides = [];
+      let timer;
 
-<!-- Font Awesome for navigation icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+      function showSlide(index) {
+        gallery.style.transform = `translateX(-${index * 100}%)`;
 
-<!-- Gallery Styles -->
-<style>
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-  }
+        document.querySelectorAll(".swiper-pagination-bullet").forEach((dot, i) => {
+          dot.classList.toggle("swiper-pagination-bullet-active", i === index);
+        });
 
-  .image-container:hover {
-    transform: scale(1.02);
-  }
+        slideIndex = index;
+      }
 
-  .image-container img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-  }
+      function nextSlide() {
+        const newIndex = (slideIndex + 1) % slides.length;
+        showSlide(newIndex);
+      }
 
-  .image-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: #fff;
-    padding: 12px 16px;
-    box-sizing: border-box;
-  }
+      function prevSlide() {
+        const newIndex = (slideIndex - 1 + slides.length) % slides.length;
+        showSlide(newIndex);
+      }
 
-  .swiper-nav-btn {
-    background-color: #056839;
-    color: #fff;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 50%;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-  }
+      function startAutoplay() {
+        timer = setInterval(nextSlide, 4000);
+      }
 
-  .swiper-nav-btn:hover {
-    background-color: #044e2a;
-  }
+      function stopAutoplay() {
+        clearInterval(timer);
+      }
 
-  .swiper-pagination-bullet {
-    background: #ccc;
-    opacity: 1;
-  }
+      try {
+        const response = await fetch("https://rcrp.gov.mw/wp-json/wp/v2/gallery?acf_format=standard");
+        const data = await response.json();
 
-  .swiper-pagination-bullet-active {
-    background: #056839;
-  }
+        data.forEach((item, i) => {
+          const imageUrl = item.acf?.image?.url || item.acf?.image;
+          const imageAlt = item.title.rendered || "Gallery Image";
+          const description = item.acf?.image_description || "";
 
-  @media (max-width: 768px) {
-    .image-container img {
-      height: 200px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .gallery-swiper-controls {
-      justify-content: center;
-      flex-direction: column;
-      gap: 8px;
-    }
-  }
-</style>
-
-<!-- JavaScript to Fetch and Display Gallery -->
-<script>
-  document.addEventListener("DOMContentLoaded", async function () {
-    const wrapper = document.getElementById("gallery-wrapper");
-
-    try {
-      const response = await fetch("https://rcrp.gov.mw/wp-json/wp/v2/gallery?acf_format=standard");
-      const data = await response.json();
-
-      data.forEach((item) => {
-        const imageUrl = item.acf?.image?.url || item.acf?.image;
-        const imageAlt = item.title.rendered || "Gallery Image";
-        const description = item.acf?.image_description || "";
-
-        const slide = document.createElement("div");
-        slide.className = "swiper-slide p-4";
-        slide.innerHTML = `
-          <div class="h-full w-full image-container shadow-md">
-            <img src="${imageUrl}" alt="${imageAlt}" />
-            <div class="image-overlay">
-              <h3 class="text-lg font-semibold">${imageAlt}</h3>
-              <p class="text-sm mt-1">${description}</p>
+          const slide = document.createElement("div");
+          slide.className = "gallery-slide";
+          slide.innerHTML = `
+            <div class="image-container shadow-md">
+              <img src="${imageUrl}" alt="${imageAlt}" />
+              <div class="image-overlay">
+                <h3 class="text-lg font-semibold">${imageAlt}</h3>
+                <p class="text-sm mt-1">${description}</p>
+              </div>
             </div>
-          </div>
-        `;
-        wrapper.appendChild(slide);
-      });
+          `;
+          gallery.appendChild(slide);
+          slides.push(slide);
 
-      // Initialize Swiper
-      const gallerySwiper = new Swiper('#gallery-swiper', {
-        loop: true,
-        slidesPerView: 1.2,
-        centeredSlides: true,
-        spaceBetween: 20,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        },
-        pagination: {
-          el: "#gallery-swiper .gallery-swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".gallery-swiper-button-next",
-          prevEl: ".gallery-swiper-button-prev",
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 1.5,
-            spaceBetween: 30,
-          },
-          1024: {
-            slidesPerView: 1.7,
-            spaceBetween: 40,
-          },
-        },
-      });
+          const dot = document.createElement("div");
+          dot.className = "swiper-pagination-bullet";
+          dot.addEventListener("click", () => {
+            stopAutoplay();
+            showSlide(i);
+            startAutoplay();
+          });
+          pagination.appendChild(dot);
+        });
 
-      // Optional: Pause autoplay on hover for each slide
-      const gallerySlides = document.querySelectorAll("#gallery-swiper .swiper-slide");
-      gallerySlides.forEach((slide) => {
-        slide.addEventListener("mouseenter", () => gallerySwiper.autoplay.stop());
-        slide.addEventListener("mouseleave", () => gallerySwiper.autoplay.start());
-      });
+        // Add hover listeners to pause/resume autoplay
+        gallery.addEventListener("mouseenter", stopAutoplay);
+        gallery.addEventListener("mouseleave", startAutoplay);
 
-    } catch (error) {
-      console.error("Failed to load gallery:", error);
-    }
-  });
-</script>
+        // Button listeners
+        document.getElementById("nextBtn").addEventListener("click", () => {
+          stopAutoplay();
+          nextSlide();
+          startAutoplay();
+        });
+
+        document.getElementById("prevBtn").addEventListener("click", () => {
+          stopAutoplay();
+          prevSlide();
+          startAutoplay();
+        });
+
+        // Start gallery
+        showSlide(0);
+        startAutoplay();
+      } catch (error) {
+        console.error("Failed to load gallery:", error);
+      }
+    });
+  </script>
+</body>
+</html>
