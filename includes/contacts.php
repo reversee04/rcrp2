@@ -1,7 +1,7 @@
 
   <section>
     <div
-      class="relative bg-blue-900 bg-opacity-75 h-screen"
+      class="relative bg-blue-900 bg-opacity-75 h-[400px]"
       style="
         background-image: url('./../images/bgCorousel_main.jpg');
         background-size: cover;

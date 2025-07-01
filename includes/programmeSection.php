@@ -1,97 +1,62 @@
+<section class="bg-white min-h-screen flex items-center px-4 py-12">
+  <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Left Side: Image with Green Shadow -->
+    <div class="relative w-full h-64 md:h-96">
+      <div class="absolute bottom-4 right-2 bg-green-600 w-full h-full"></div>
+      <div class="relative bg-gray-300 w-full h-full flex items-center justify-center">
+        <img src="images/RCRP-2-LOGO.png" alt="">
+      </div>
+    </div>
 
-  <section>
-    <section class="bg-white min-h-screen flex items-center px-4 py-12">
-      <div
-        class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-      >
-        <!-- Left Side: Image with Green Shadow -->
-        <div class="relative w-full h-64 md:h-96">
-          <div
-            class="absolute bottom-4 right-2 bg-green-600 w-full h-full"
-          ></div>
-          <div
-            class="relative bg-gray-300 w-full h-full flex items-center justify-center"
-          >
-            <!-- Placeholder for Image -->
-            <span class="text-5xl text-gray-500"
-              ><i class="fas fa-image"></i
-            ></span>
-          </div>
-        </div>
+    <!-- Right Side: Content List -->
+    <div class="flex flex-col gap-8">
 
-        <!-- Right Side: Content List -->
-        <div class="flex flex-col gap-8">
-          <!-- Item 1 -->
-          <div class="flex items-start gap-4">
-            <span class="text-2xl text-black">
-              <span class="fas fa-cube"></span>
-            </span>
-            <div>
-              <h3 class="text-lg font-bold mb-2">
-                Local Government Strengthening
-              </h3>
-              <p class="text-gray-600 mb-2">
-                Highlight Unique Selling Propositions with a short summary of
-                the key feature and how it benefits customers.
-              </p>
-              <a
-                href="#"
-                class="flex items-center gap-1 text-green-600 font-medium hover:underline"
-              >
-                Learn more
-                <span class="fas fa-arrow-right text-xs"></span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div class="flex items-start gap-4">
-            <span class="text-2xl text-black">
-              <span class="fas fa-cube"></span>
-            </span>
-            <div>
-              <h3 class="text-lg font-bold mb-2">Infrastructure Development</h3>
-              <p class="text-gray-600 mb-2">
-                Highlight Unique Selling Propositions with a short summary of
-                the key feature and how it benefits customers.
-              </p>
-              <a
-                href="#"
-                class="flex items-center gap-1 text-green-600 font-medium hover:underline"
-              >
-                Learn more
-                <span class="fas fa-arrow-right text-xs"></span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="flex items-start gap-4">
-            <span class="text-2xl text-black">
-              <span class="fas fa-cube"></span>
-            </span>
-            <div>
-              <h3 class="text-lg font-bold mb-2">
-                Fiscal Accountability Tools
-              </h3>
-              <p class="text-gray-600 mb-2">
-                Highlight Unique Selling Propositions with a short summary of
-                the key feature and how it benefits customers.
-              </p>
-              <a
-                href="#"
-                class="flex items-center gap-1 text-green-600 font-medium hover:underline"
-              >
-                Learn more
-                <span class="fas fa-arrow-right text-xs"></span>
-              </a>
-            </div>
-          </div>
+      <!-- Component 1 -->
+      <div class="flex items-start gap-4">
+        <span class="text-2xl text-black"><span class="fas fa-cube"></span></span>
+        <div>
+          <h3 class="text-lg font-bold mb-2">Risk Management & Climate Financing</h3>
+          <p class="text-gray-600 mb-2">Builds capacity for climate disaster preparedness, financing access, and regional water management.</p>
         </div>
       </div>
-    </section>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+
+      <!-- Component 2 -->
+      <div class="flex items-start gap-4">
+        <span class="text-2xl text-black"><span class="fas fa-cube"></span></span>
+        <div>
+          <h3 class="text-lg font-bold mb-2">Infrastructure & Asset Management</h3>
+          <p class="text-gray-600 mb-2">Rehabilitates critical infrastructure and promotes sustainable, climate-resilient construction.</p>
+        </div>
+      </div>
+
+      <!-- Component 3 -->
+      <div class="flex items-start gap-4">
+        <span class="text-2xl text-black"><span class="fas fa-cube"></span></span>
+        <div>
+          <h3 class="text-lg font-bold mb-2">Local Authority Support</h3>
+          <p class="text-gray-600 mb-2">Improves local governance and urban resilience through public works and social registries.</p>
+        </div>
+      </div>
+
+      <!-- Component 4 -->
+      <div class="flex items-start gap-4">
+        <span class="text-2xl text-black"><span class="fas fa-cube"></span></span>
+        <div>
+          <h3 class="text-lg font-bold mb-2">Adaptive Management</h3>
+          <p class="text-gray-600 mb-2">Funds project oversight, monitoring, learning, and communication activities across the region.</p>
+        </div>
+      </div>
+
+      <!-- Component 5 -->
+      <div class="flex items-start gap-4">
+        <span class="text-2xl text-black"><span class="fas fa-cube"></span></span>
+        <div>
+          <h3 class="text-lg font-bold mb-2">Emergency Response</h3>
+          <p class="text-gray-600 mb-2">Provides quick-response funding for eligible crises like floods or cyclones.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
